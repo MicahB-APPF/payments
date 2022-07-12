@@ -2,6 +2,7 @@
 #IV landing page experiment results
 
 library(statmod)
+library(Hmisc)
 
 IVpage <-
   matrix(c(8, 145, 17, 135),
@@ -42,5 +43,22 @@ prop.test(c(3795,4279),c(9617,10242), alternative = "less")
 #also 99% confident
 
 #to do: compare debit usage rates to historic debit rates for larger population
+
+#how large is the uncertainty around the actual increase in debit usage?
+binconf(4279,10242, alpha=0.05, method = "all")
+
+#lower = 0.408, upper 0.427
+
+binconf(3795,9617, alpha=0.05, method = "all")
+
+#lower = 0.385, 0.404
+
+(0.408 - 0.404)/0.408
+
+#1% relative lift
+
+(0.427 - 0.385)/0.427
+
+#10% relative lift
 
 
