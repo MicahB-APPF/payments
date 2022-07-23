@@ -61,4 +61,11 @@ binconf(3795,9617, alpha=0.05, method = "all")
 
 #10% relative lift
 
+#next steps:  
+
+#break out results into apple pay enabled -> used apple pay vs apple pay enabled -> didn't use apple pay -- is there a diff in credit/debit usage?
+
+#look at switching behavior for population -> do ach users switch to apple pay in month 2?  how sticky is apple pay?  one-off for first month or continued use?
+
+#also look at %online payments vs offline -- do more users pay online because they have acces to apple pay?  or, is the UI so cluttered that they just get out the checkbook?
 
