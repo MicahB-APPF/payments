@@ -22,44 +22,44 @@ power.fisher.test(0.0523, 0.1118, 153, 152,alpha=0.05, nsim=100, alternative = "
 
 #Use Fisher test for Apple Pay Experiment
 
-ap =   matrix(c(3795, 9617, 4279, 10242),
+ap =   matrix(c(6030, 15223, 6642, 16379),
               nrow = 2,
               dimnames = list(conversions = c("debit", "total_payments"),
                               no_conversions = c("disabled", "enabled")))
 fisher.test(ap, alternative = "less")
-#99% confident that users with apple pay enabled use debit more
+#86% confident that users with apple pay enabled use debit more -- this is not the best method now that sample size is bigger -- see prop test below
 
 power.fisher.test(0.3946, 0.4177, 9617, 10242,alpha=0.05, nsim=100, alternative = "less")
 
 #given the large sample size maybe a different test would be better
 
-prop.test(c(597,671),c(9617,10242), alternative = "less")
-#83% confident
+prop.test(c(1046,1143),c(15223,16379), alternative = "less") #credit
+#64% confident
 
-prop.test(c(5225,5292),c(9617,10242), alternative = "less")
-#no difference
+prop.test(c(8147,8594),c(15223,16379), alternative = "greater") #ach
+#97% confident
 
-prop.test(c(3795,4279),c(9617,10242), alternative = "less")
-#also 99% confident
+prop.test(c(6030,6642),c(15223,16379), alternative = "less") #debit
+# 95% confident
 
 #to do: compare debit usage rates to historic debit rates for larger population
 
 #how large is the uncertainty around the actual increase in debit usage?
-binconf(4279,10242, alpha=0.05, method = "all")
+binconf(6642,16379, alpha=0.05, method = "all")
 
-#lower = 0.408, upper 0.427
+#lower = 0.406, upper 0.413
 
-binconf(3795,9617, alpha=0.05, method = "all")
+binconf(6030,15223, alpha=0.05, method = "all")
 
-#lower = 0.385, 0.404
+#lower = 0.396, 0.404
 
-(0.408 - 0.404)/0.408
+(0.406 - 0.404)/0.406
 
-#1% relative lift
+#0.5% relative lift
 
-(0.427 - 0.385)/0.427
+(0.413 - 0.396)/0.413
 
-#10% relative lift
+#4% relative lift
 
 #next steps:  
 
