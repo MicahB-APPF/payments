@@ -4,26 +4,18 @@ graphics.off() #close open graphics windows
 library(tidyverse)
 library(dygraphs)
 library(xts)
+library(readxl)
 
-sales = as_tibble(read.csv("Rent_clean_counts.csv"))
+sales = read_excel("Rent_Data.xlsx", sheet = "clean_counts")
 dat = as_tibble(t(sales[,3:42]))
-dat$date = as.Date(seq(as.Date('2019-01-01'), by = "month", length.out = 40))
+dat$month = seq(as.Date('2019-01-01'), by = "month", length.out = 40)
 
+z1 = dat  %>% select(month,V1) %>% rename(ds = 1, y = 2)
+
+z4 = xts(x = z1, order.by = z1$ds)
+
+dygraph(z4) %>% dySeries("y", label = "Actual") %>% dyOptions(colors = RColorBrewer::brewer.pal(3, "Set1")) %>% dyLegend(show = "onmouseover") %>% dyRangeSelector() %>% dyEvent("2022-06-22", "Landing Page and Marketplace Launch Date", labelLoc = "bottom")
 
 dat = xts(x = dat, order.by = date)
 
 dat = dat %>% select(date,V19) %>% rename(ds = 1, y = 2)
-
-z = pivot_longer(sales)
-
-relig_income
-relig_income %>%
-  pivot_longer(!religion, names_to = "income", values_to = "count")
-
-dat <- as.data.frame(matrix(as.numeric t(sales[,3:42])
-> colnames(dat) <- LETTERS[1:4]
-> dat
-A B C  D
-1 1 4 7 10
-2 2 5 8 11
-3 3 6 9 12
