@@ -69,3 +69,56 @@ binconf(6030,15223, alpha=0.05, method = "all")
 
 #also look at %online payments vs offline -- do more users pay online because they have acces to apple pay?  or, is the UI so cluttered that they just get out the checkbook?
 
+
+#is the apple pay experiment impacting autopayments significantly?  how many samples do we need to detect a 1% difference?
+
+prop.test(c(1168,1398),c(18281,19791), alternative = "less") #pct autopay
+#99% confident
+
+#sample estimates:
+  #prop 1     prop 2 
+#0.06389147 0.07063817
+
+#how large is the uncertainty around the actual increase in debit usage?
+binconf(1168,18281, alpha=0.05, method = "all") #prop 1 confidence intervals
+
+#lower = 0.0603, upper 0.0675
+
+binconf(1398,19791, alpha=0.05, method = "all") #prop 2 confidence intervals
+
+#lower = 0.0671, 0.0742
+
+(0.0675 - 0.0671)
+
+#prop 1 is higher so no increase 
+
+abs((0.0603 - 0.0742))/0.0742
+
+#18.7% relative increase in prop 2
+
+
+
+prop.test(c(157,229),c(7084,7886), alternative = "less") #debit
+#99% confident
+
+#sample estimates:
+#prop 1     prop 2 
+#0.02216262 0.02903880
+
+#how large is the uncertainty around the actual increase in debit usage?
+binconf(157,7084, alpha=0.05, method = "all") #prop 1 confidence intervals
+
+#lower = 0.0188, upper 0.0258
+
+binconf(229,7886, alpha=0.05, method = "all") #prop 2 confidence intervals
+
+#lower = 0.0254, upper 0.0329
+
+(0.0258 - 0.0254)
+
+#prop 1 is higher so no increase 
+
+abs((0.0188 - 0.0329))/0.0329
+
+#42.8% relative increase in prop 2
+
