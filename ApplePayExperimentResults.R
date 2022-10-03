@@ -4,6 +4,25 @@
 library(statmod)
 library(Hmisc)
 
+###final results###
+prop.test(c(7782,7970),c(140796,147983), alternative = "less") #credit
+#95% confident that credit % is higher
+
+prop.test(c(85398,87900),c(140796,147983), alternative = "less") #ach
+#99% confident  that ach % is higher
+
+prop.test(c(47616,52113),c(140796,147983), alternative = "greater") #99% confident that debit % is higher
+
+##what is the range of uncertainty?
+
+#how large is the uncertainty around credit?
+binconf(7782,140796, alpha=0.05, method = "all")
+
+0.05527146-0.05408348
+0.05647779-0.05527146
+
+binconf(7970,147983, alpha=0.05, method = "all")
+
 IVpage <-
   matrix(c(8, 145, 17, 135),
          nrow = 2,
@@ -33,8 +52,8 @@ power.fisher.test(0.3946, 0.4177, 9617, 10242,alpha=0.05, nsim=100, alternative 
 
 #given the large sample size maybe a different test would be better
 
-prop.test(c(1046,1143),c(15223,16379), alternative = "less") #credit
-#64% confident
+prop.test(c(5886,6036),c(101053,106371), alternative = "less") #credit
+#93% confident 
 
 prop.test(c(8147,8594),c(15223,16379), alternative = "greater") #ach
 #97% confident
