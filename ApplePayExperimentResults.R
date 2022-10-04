@@ -1,5 +1,4 @@
-#example of using the fisher test for small sample sizes
-#IV landing page experiment results
+#Apple Pay Experiment Results - data from 3 Oct 2022
 
 library(statmod)
 library(Hmisc)
@@ -17,11 +16,28 @@ prop.test(c(47616,52113),c(140796,147983), alternative = "greater") #99% confide
 
 #how large is the uncertainty around credit?
 binconf(7782,140796, alpha=0.05, method = "all")
-
-0.05527146-0.05408348
-0.05647779-0.05527146
-
 binconf(7970,147983, alpha=0.05, method = "all")
+
+#how large is the uncertainty around debit?
+binconf(47616,140796, alpha=0.05, method = "all")
+binconf(52113,147983, alpha=0.05, method = "all")
+
+#used 99% interval in slides -- more intuitive
+#how large is the uncertainty around debit?
+binconf(47616,140796, alpha=0.01, method = "all")
+binconf(52113,147983, alpha=0.01, method = "all")
+
+#how large is the uncertainty around ach?
+binconf(85398,140796, alpha=0.01, method = "all")
+binconf(87900,147983, alpha=0.01, method = "all")
+
+#Now look at all transactions
+
+##still working on query, read in all transactions + relevant attributes for deep dive
+
+
+##NOT USED
+
 
 IVpage <-
   matrix(c(8, 145, 17, 135),
