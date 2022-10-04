@@ -33,7 +33,28 @@ binconf(87900,147983, alpha=0.01, method = "all")
 
 #Now look at all transactions
 
-##still working on query, read in all transactions + relevant attributes for deep dive
+##read in all transactions from users in experiment + relevant attributes for deep dive
+
+library(tidyverse)
+ns = read_csv("PMT_Apple_Pay_All_Transactions_2022_10_04.csv")
+
+ns %>% filter(VARIATION_NAME == 'enabled' & IS_APPLE_PAY == TRUE) %>% count(PAYMENT_METHOD)
+#1100 credit, 6507 debit
+
+#100 random samples to check credit/debit split for enabled group who chose AP vs those who did not
+results = tibble(credit = numeric(),debit = numeric())
+n = 1
+
+for (n in 1:100) {
+
+z = ns %>% filter(VARIATION_NAME == 'enabled' & IS_APPLE_PAY == FALSE) %>% slice_sample(n = 20000) %>% count(PAYMENT_METHOD)
+results[n,1] = z %>% filter(PAYMENT_METHOD == 'credit') %>% select(n) %>% as.numeric()
+results[n,2] = z %>% filter(PAYMENT_METHOD == 'debit') %>% select(n) %>% as.numeric()
+}
+
+mean(results$credit) #988
+mean(results$debit)  #6540
+
 
 
 ##NOT USED
