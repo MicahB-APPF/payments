@@ -1,42 +1,42 @@
-#Apple Pay Experiment Results - data from 3 Oct 2022
+#Apple Pay Experiment Results - data from 14 Oct 2022
 
 library(statmod)
 library(Hmisc)
 
 ###final results###
-prop.test(c(7782,7970),c(140796,147983), alternative = "less") #credit
-#95% confident that credit % is higher
+###new users###
 
-prop.test(c(85398,87900),c(140796,147983), alternative = "less") #ach
-#99% confident  that ach % is higher
+prop.test(c(54246,53067),c(123607,129078), alternative = "greater") #99% confident that card usage % is higher in b group
 
-prop.test(c(47616,52113),c(140796,147983), alternative = "greater") #99% confident that debit % is higher
+prop.test(c(7039,7268),c(123607,129078), alternative = "greater") #cannot say conclusively that credit is greater in B group
+
+prop.test(c(47207,45799),c(123607,129078), alternative = "greater") #99% confident that debit % is higher
+
+prop.test(c(69361,76011),c(123607,129078), alternative = "less") #99% confident that ach % is lower
 
 ##what is the range of uncertainty?
 
-#how large is the uncertainty around credit?
-binconf(7782,140796, alpha=0.05, method = "all")
-binconf(7970,147983, alpha=0.05, method = "all")
-
 #how large is the uncertainty around debit?
-binconf(47616,140796, alpha=0.05, method = "all")
-binconf(52113,147983, alpha=0.05, method = "all")
-
-#used 99% interval in slides -- more intuitive
-#how large is the uncertainty around debit?
-binconf(47616,140796, alpha=0.01, method = "all")
-binconf(52113,147983, alpha=0.01, method = "all")
+binconf(45799,129078, alpha=0.01, method = "all")
+binconf(47207,123607, alpha=0.01, method = "all")
 
 #how large is the uncertainty around ach?
-binconf(85398,140796, alpha=0.01, method = "all")
-binconf(87900,147983, alpha=0.01, method = "all")
+binconf(76011,129078, alpha=0.01, method = "all")
+binconf(69361,123607, alpha=0.01, method = "all")
+
+####
+#credit/debit split (margin)
+prop.test(c(47207,45799),c(54246,53067), alternative = "greater") #99% confident that debit usage % is higher in b group
+
+prop.test(c(7039,7268),c(54246,53067), alternative = "less") #cannot say conclusively that credit is greater in B group
+
 
 #Now look at all transactions
 
 ##read in all transactions from users in experiment + relevant attributes for deep dive
 
 library(tidyverse)
-ns = read_csv("PMT_Apple_Pay_All_Transactions_2022_10_04.csv")
+ns = read_csv("PMT_Apple_Pay_All_Transactions_2022_10_14.csv")
 
 ns %>% filter(VARIATION_NAME == 'enabled' & IS_APPLE_PAY == TRUE) %>% count(PAYMENT_METHOD)
 #1100 credit, 6507 debit
