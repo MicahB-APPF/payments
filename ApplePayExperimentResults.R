@@ -1,4 +1,4 @@
-#Apple Pay Experiment Results - data from 14 Oct 2022
+#Apple Pay Experiment Results - data from 24 Oct 2022
 
 library(statmod)
 library(Hmisc)
@@ -6,29 +6,33 @@ library(Hmisc)
 ###final results###
 ###new users###
 
-prop.test(c(54246,53067),c(123607,129078), alternative = "greater") #99% confident that card usage % is higher in b group
+prop.test(c(47703,45585),c(106491,107986), alternative = "greater") #99% confident that card usage % is higher in b group
 
-prop.test(c(7039,7268),c(123607,129078), alternative = "greater") #cannot say conclusively that credit is greater in B group
+prop.test(c(5868,5586),c(106491,107986), alternative = "greater") #99% confident that credit is greater in B group
 
-prop.test(c(47207,45799),c(123607,129078), alternative = "greater") #99% confident that debit % is higher
+prop.test(c(41835,39999),c(106491,107986), alternative = "greater") #99% confident that debit % is higher
 
-prop.test(c(69361,76011),c(123607,129078), alternative = "less") #99% confident that ach % is lower
+prop.test(c(58788,62401),c(106491,107986), alternative = "less") #99% confident that ach % is lower
 
 ##what is the range of uncertainty?
 
+#how large is the uncertainty around credit?
+binconf(5868,106491, alpha=0.01, method = "all")
+binconf(5586,107986, alpha=0.01, method = "all")
+
 #how large is the uncertainty around debit?
-binconf(45799,129078, alpha=0.01, method = "all")
-binconf(47207,123607, alpha=0.01, method = "all")
+binconf(41835,106491, alpha=0.01, method = "all")
+binconf(39999,107986, alpha=0.01, method = "all")
 
 #how large is the uncertainty around ach?
-binconf(76011,129078, alpha=0.01, method = "all")
-binconf(69361,123607, alpha=0.01, method = "all")
+binconf(58788,106491, alpha=0.01, method = "all")
+binconf(62401,107986, alpha=0.01, method = "all")
 
 ####
 #credit/debit split (margin)
-prop.test(c(47207,45799),c(54246,53067), alternative = "greater") #99% confident that debit usage % is higher in b group
+prop.test(c(41835,39999),c(47703,45585), alternative = "greater") #99% confident that debit usage % is higher in b group
 
-prop.test(c(7039,7268),c(54246,53067), alternative = "less") #cannot say conclusively that credit is greater in B group
+prop.test(c(5868,5586),c(47703,45585), alternative = "greater") #cannot say conclusively that credit is greater in B group
 
 
 #Now look at all transactions
