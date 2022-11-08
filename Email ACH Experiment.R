@@ -2,6 +2,8 @@ library(dplyr)
 
 pmt <- read.csv("PMT_Email_Portal_Activation_Test_Data.csv")
 
+pmt2 <- read.csv("PMT_Email_Portal_Test_Activation_Data_v2.csv")
+
 #1343 vhosts - 671 for the test
 
 hist(pmt$NEW_OCC_EMAIL_ACTIVATED)
@@ -20,7 +22,37 @@ hist(sample$NEW_OCC_EMAIL_ACTIVATED)
 hist(sample$AVG_OCC_AP_EMAIL)
 
 
-###not used - yet
+samp <- read.csv("email_ach_sample.csv")
+test = left_join(pmt,samp, by = "VHOST")
+
+
+##trobleshoot duplicates
+
+pmt %>% 
+  group_by(VHOST) %>% 
+  filter(n()>1) %>% summarize(n=n())
+
+samp %>% 
+  group_by(VHOST) %>% 
+  filter(n()>1) %>% summarize(n=n())
+
+
+test %>% 
+  group_by(VHOST) %>% 
+  filter(n()>1) %>% summarize(n=n())
+
+pmt %>% filter(VHOST == 'awmgtgrp')
+
+###test revised data
+
+pmt2 %>% 
+  group_by(VHOST) %>% 
+  filter(n()>1) %>% summarize(n=n())
+
+test2 = left_join(pmt2,samp, by = "VHOST")
+
+
+write.csv(test2,"screening_sample_v3.csv")
 
 hist(sample$TOTAL_UNITS)
 hist(sample$TENURE)
