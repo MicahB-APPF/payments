@@ -28,6 +28,10 @@ binconf(39999,107986, alpha=0.01, method = "all")
 binconf(58788,106491, alpha=0.01, method = "all")
 binconf(62401,107986, alpha=0.01, method = "all")
 
+#how large is the uncertainty around card?
+binconf(47703,106491, alpha=0.01, method = "all")
+binconf(45585,107986, alpha=0.01, method = "all")
+
 ####
 #credit/debit split (margin)
 prop.test(c(41835,39999),c(47703,45585), alternative = "greater") #99% confident that debit usage % is higher in b group
