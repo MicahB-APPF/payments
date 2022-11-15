@@ -1,4 +1,4 @@
-#Apple Pay Drivers - simple forecasting
+#Payables - simple forecasting
 
 library(tidyverse)
 library(prophet)
